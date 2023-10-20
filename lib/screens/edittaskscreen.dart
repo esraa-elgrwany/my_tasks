@@ -1,27 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_project/models/taskmodel.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
 import 'package:todo_project/shared/styles/colors.dart';
 
-class TaskBottomSheet extends StatefulWidget {
+class HomeLayout extends StatefulWidget{
+  static const String routeName = "editScreen";
+
   @override
-  State<TaskBottomSheet> createState() => _TaskBottomSheetState();
+  State<HomeLayout> createState() => _HomeLayoutState();
 }
 
-class _TaskBottomSheetState extends State<TaskBottomSheet> {
+class _HomeLayoutState extends State<HomeLayout> {
   TextEditingController titleController = TextEditingController();
 
   TextEditingController descriptionController = TextEditingController();
 
   var selectedDate = DateTime.now();
+
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.surface,
-      child: Padding(
-        padding: const EdgeInsets.all(18),
+    return Scaffold(
+        extendBody: true,
+        appBar: AppBar(
+        toolbarHeight: 100,
+        title:
+        Text(AppLocalizations.of(context)!.appTitle ,
+    style:Theme.of(context).textTheme.bodyLarge,
+    )
+    ),
+      body: Card(
+        color:  Theme.of(context).colorScheme.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Form(
           key: formKey,
           child: Column(
@@ -125,8 +139,6 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                           title: titleController.text,
                           description: descriptionController.text,
                           date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
-                      print(taskModel.date);
-print('+++++++++++');
                       FireBaseFunctions.addTask(taskModel);
                       Navigator.pop(context);
 
@@ -134,8 +146,8 @@ print('+++++++++++');
                   },
                   style: ButtonStyle(
                       shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                    borderRadius: BorderRadiusDirectional.circular(12),
-                  ))),
+                        borderRadius: BorderRadiusDirectional.circular(12),
+                      ))),
                   child: Text("add Task",
                       style: Theme.of(context)
                           .textTheme
@@ -158,7 +170,6 @@ print('+++++++++++');
       return;
     }
     selectedDate = chosenDate;
-
     setState(() {});
   }
 }
