@@ -6,48 +6,81 @@ import 'colors.dart';
 class MyThemeData{
 
   static ThemeData lightTheme=ThemeData(
-      scaffoldBackgroundColor: mint,
+    colorScheme: ColorScheme(
+        brightness: Brightness.light,
+        primary:primaryColor, onPrimary:primaryColor, secondary: Colors.black,
+        onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
+        background:mint,
+        onBackground:Colors.white,
+        surface:Colors.white,
+        onSurface: Colors.black),
 
+      scaffoldBackgroundColor: mint,
+      appBarTheme: AppBarTheme(
+        color: primaryColor,
+      ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: primaryColor,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: false,
         showSelectedLabels: false,
-      )
+      ),
+    textTheme: TextTheme(
+      bodySmall: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color:Colors.black,
+      ),
+      bodyMedium: GoogleFonts.poppins(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color:primaryColor,
+      ),
+      bodyLarge: GoogleFonts.poppins(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color:Colors.white,
+      ),
+    ),
   );
   static ThemeData darkTheme=ThemeData(
-      scaffoldBackgroundColor: Colors.transparent,
-      appBarTheme: AppBarTheme(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        color: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-      ),
+    colorScheme: ColorScheme(
+        brightness: Brightness.dark,
+        primary:primaryColor, onPrimary: Colors.white, secondary:grey,
+        onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
+        background:darkBg,
+        onBackground:Colors.white,
+        surface:darkgrey,
+        onSurface: Colors.white),
+
+      scaffoldBackgroundColor: darkBg,
+    appBarTheme: AppBarTheme(
+      color: primaryColor,
+    ),
       textTheme: TextTheme(
-        bodySmall: GoogleFonts.elMessiri(
-          fontSize: 20,
+        bodySmall: GoogleFonts.poppins(
+          fontSize: 14,
           fontWeight: FontWeight.w400,
           color:Colors.white,
         ),
-        bodyMedium: GoogleFonts.elMessiri(
-          fontSize: 25,
+        bodyMedium: GoogleFonts.poppins(
+          fontSize: 18,
           fontWeight: FontWeight.w700,
-          color:Colors.yellow,
+          color:primaryColor,
         ),
-        bodyLarge: GoogleFonts.elMessiri(
-          fontSize: 30,
+        bodyLarge: GoogleFonts.poppins(
+          fontSize: 22,
           fontWeight: FontWeight.bold,
-          color:Colors.white,
+          color:Colors.black,
         ),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.shifting,
-        backgroundColor: darkPrimary,
-        selectedItemColor: yellow,
-        unselectedItemColor: Colors.white,
-      )
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: primaryColor,
+      unselectedItemColor: Colors.white,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+    ),
   );
 }

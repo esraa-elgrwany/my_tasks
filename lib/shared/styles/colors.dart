@@ -2,5 +2,7 @@
 
  Color primaryColor=Color(0xFF5D9CEC);
  Color mint=Color(0xFFDFECDB);
- Color darkPrimary=Color(0xFF141A2E);
- Color yellow=Color(0xFFFACC1D);
+ Color darkBg=Color(0xFF060E1E);
+ Color darkgrey=Color(0xFF141922);
+ Color grey=Color(0xFFCDCACA);
+

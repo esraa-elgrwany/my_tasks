@@ -1,39 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:todo_project/models/taskmodel.dart';
+import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
 import 'package:todo_project/shared/styles/colors.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TaskItem extends StatelessWidget{
-  const TaskItem({super.key});
+  TaskModel taskModel;
+  TaskItem({required this.taskModel,super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical:12,horizontal:18),
       child: Card(
+        color: Theme.of(context).colorScheme.surface,
        shape: RoundedRectangleBorder(
          borderRadius: BorderRadius.circular(15)
        ),
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Row(
-            children: [
-              Container(
-                width: 4,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                    borderRadius: BorderRadius.circular(18),
+        child: Slidable(
+          startActionPane: ActionPane(motion:DrawerMotion() ,
+              children: [
+                SlidableAction(onPressed: (context) {
+            FireBaseFunctions.deleteTask(taskModel.id);
+                },
+                icon:Icons.delete,
+                label: "Delete",
+                backgroundColor: Colors.red,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15)),
                 ),
-              ),
-              SizedBox(width:20,),
-              Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Task title"),
-                  Text("Task description"),
-                ],
-              ),Spacer(),
-              Icon(Icons.done),
-            ],
+                SlidableAction(onPressed: (context) {
+
+                },
+                  borderRadius: BorderRadius.only(topRight
+                      : Radius.circular(15),
+                      bottomRight: Radius.circular(15)),
+                  icon:Icons.edit,
+                  label: "Edit",
+                  backgroundColor: Colors.blue,
+                )
+              ]),
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Row(
+              children: [
+                Container(
+                  width: 4,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color:primaryColor,
+                      borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                SizedBox(width:20,),
+                Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(taskModel.title??'****'),
+                    Text(taskModel.description??'***'),
+                  ],
+                ),Spacer(),
+                taskModel.isDone?
+                Container(
+                    width: 69,
+                    height: 34,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Text("Done",style: TextStyle(color: Colors.white),))
+                : InkWell(
+                  onTap: () {
+                    taskModel.isDone=true;
+                    FireBaseFunctions.updateTask(taskModel);
+                  },
+                  child: Container(
+                    width: 69,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                      child: Icon(Icons.check,color: Colors.white)),
+                ),
+              ],
+            ),
           ),
         ),
       ),
