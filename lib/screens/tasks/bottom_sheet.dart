@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_project/models/taskmodel.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
@@ -9,9 +10,9 @@ class TaskBottomSheet extends StatefulWidget {
 }
 
 class _TaskBottomSheetState extends State<TaskBottomSheet> {
-  TextEditingController titleController = TextEditingController();
+  var titleController = TextEditingController();
 
-  TextEditingController descriptionController = TextEditingController();
+ var descriptionController = TextEditingController();
 
   var selectedDate = DateTime.now();
   var formKey = GlobalKey<FormState>();
@@ -124,9 +125,11 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                       TaskModel taskModel = TaskModel(
                           title: titleController.text,
                           description: descriptionController.text,
-                          date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
-                      print(taskModel.date);
-print('+++++++++++');
+                          date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch,
+                        userId: FirebaseAuth.instance.currentUser!.uid,
+                      );
+                     // print(taskModel.date);
+                      // print('+++++++++++');
                       FireBaseFunctions.addTask(taskModel);
                       Navigator.pop(context);
 
