@@ -18,6 +18,9 @@ class MyThemeData{
       scaffoldBackgroundColor: mint,
       appBarTheme: AppBarTheme(
         color: primaryColor,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        )
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
@@ -29,12 +32,12 @@ class MyThemeData{
     textTheme: TextTheme(
       bodySmall: GoogleFonts.poppins(
         fontSize: 14,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
         color:Colors.black,
       ),
       bodyMedium: GoogleFonts.poppins(
         fontSize: 18,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
         color:primaryColor,
       ),
       bodyLarge: GoogleFonts.poppins(
@@ -57,6 +60,9 @@ class MyThemeData{
       scaffoldBackgroundColor: darkBg,
     appBarTheme: AppBarTheme(
       color: primaryColor,
+        iconTheme: IconThemeData(
+            color: Colors.black
+        )
     ),
       textTheme: TextTheme(
         bodySmall: GoogleFonts.poppins(

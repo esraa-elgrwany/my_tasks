@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_project/layout/home_layout.dart';
+import 'package:todo_project/screens/editScreen.dart';
+import 'package:todo_project/screens/log/log.dart';
 import 'package:todo_project/shared/providers/Myprovider.dart';
 import 'package:todo_project/shared/styles/my_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,7 +16,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //FirebaseFirestore.instance.disableNetwork();
+ // FirebaseFirestore.instance.disableNetwork();
   runApp( MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => MyProvider(),),
@@ -34,9 +36,12 @@ class MyApp extends StatelessWidget {
       localizationsDelegates:AppLocalizations.localizationsDelegates,
       locale: Locale(pro.languageCode),
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeLayout.routeName,
+      initialRoute:pro.firebaseUser!=null? HomeLayout.routeName
+      :LogScreen.routeName,
       routes: {
         HomeLayout.routeName:(context) => HomeLayout(),
+        //EditScreen.routeName:(context) => EditScreen(),
+        LogScreen.routeName:(context) => LogScreen(),
       },
       themeMode:pro.modeApp ,
       theme: MyThemeData.lightTheme,
