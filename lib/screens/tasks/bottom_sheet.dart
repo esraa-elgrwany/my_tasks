@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_project/models/taskmodel.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
 import 'package:todo_project/shared/styles/colors.dart';
@@ -20,9 +21,8 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.surface,
       child: Padding(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(32),
         child: Form(
           key: formKey,
           child: Column(
@@ -34,11 +34,11 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(color: Theme.of(context).colorScheme.onSurface),
+                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 20,
+                height: 30.h,
               ),
               TextFormField(
                 controller: titleController,
@@ -49,26 +49,26 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  label: Text("Task Title",
+                  label: Text("Task name",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface)),
+                          color:  Theme.of(context).colorScheme.onPrimary)),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      width: 2,
+                      width: 2.w,
                       color: primaryColor,
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: primaryColor,
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 30.h,
               ),
               TextFormField(
                 controller: descriptionController,
@@ -81,30 +81,37 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 decoration: InputDecoration(
                   label: Text("Task Description",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface)),
+                          color:  Theme.of(context).colorScheme.onPrimary)),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       width: 2,
                       color: primaryColor,
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: primaryColor,
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 30.h,
               ),
-              Text("Selected Date",
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface)),
+              Row(
+                children: [
+                  Text("Selected Date",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color:  Theme.of(context).colorScheme.onPrimary)),
+                  SizedBox(width: 8.w,),
+                  Icon(Icons.date_range,color:
+                  Theme.of(context).colorScheme.onPrimary),
+                ],
+              ),
               SizedBox(
-                height: 20,
+                height: 30.h,
               ),
               InkWell(
                 onTap: () {
@@ -112,38 +119,42 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 },
                 child: Text(
                   selectedDate.toString().substring(0, 10),
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color:   Theme.of(context).colorScheme.onPrimary
+                  ),
                   textAlign: TextAlign.center,
+
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 30.h,
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    if(formKey.currentState!.validate()){
-                      TaskModel taskModel = TaskModel(
-                          title: titleController.text,
-                          description: descriptionController.text,
-                          date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch,
-                        userId: FirebaseAuth.instance.currentUser!.uid,
-                      );
-                     // print(taskModel.date);
-                      // print('+++++++++++');
-                      FireBaseFunctions.addTask(taskModel);
-                      Navigator.pop(context);
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      if(formKey.currentState!.validate()){
+                        TaskModel taskModel = TaskModel(
+                            title: titleController.text,
+                            description: descriptionController.text,
+                            date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch,
+                          userId: FirebaseAuth.instance.currentUser!.uid,
+                        );
+                        FireBaseFunctions.addTask(taskModel);
+                        Navigator.pop(context);
 
-                    }
-                  },
-                  style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                    borderRadius: BorderRadiusDirectional.circular(12),
-                  ))),
-                  child: Text("add Task",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: Colors.white)))
+                      }
+                    },
+                    style: ButtonStyle(
+                      padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10,horizontal: 40)),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius: BorderRadiusDirectional.circular(12),
+                    ))),
+                    child: Text("add Task",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: Colors.white))),
+              )
             ],
           ),
         ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_project/screens/setting/languagebottomsheet.dart';
 import 'package:todo_project/screens/setting/themingbottomsheet.dart';
 import 'package:todo_project/shared/providers/Myprovider.dart';
 import 'package:todo_project/shared/styles/my_theme.dart';
+
+import '../../shared/styles/colors.dart';
 
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
@@ -25,17 +28,16 @@ class _SettingTabState extends State<SettingTab> {
         children: [
           Text(AppLocalizations.of(context)!.lang,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface
+                  color: Theme.of(context).colorScheme.onPrimary
               )
                   ),
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(12),
+            margin: EdgeInsets.all(12),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-              color:Theme.of(context).colorScheme.surface,
-                border: Border.all(color: Colors.blue,
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(color: primaryColor,
                   width: 2
                 )),
             child: Row(
@@ -44,14 +46,14 @@ class _SettingTabState extends State<SettingTab> {
                     :AppLocalizations.of(context)!.ar,
                     style: Theme.of(context)
                         .textTheme
-                        .bodySmall!
-                        .copyWith(color: Theme.of(context).colorScheme.primary
+                        .bodyMedium!
+                        .copyWith(color: Theme.of(context).colorScheme.onPrimary
 
                     )),
                 Spacer(),
                 InkWell(
                     onTap: showLangugeBottomSheet,
-                    child: Icon(Icons.arrow_drop_down,size: 30,color: MyThemeData.lightTheme.primaryColor,)),
+                    child: Icon(Icons.arrow_drop_down,size: 30,color:Theme.of(context).colorScheme.onPrimary,)),
               ],
             ),
           ),
@@ -60,25 +62,24 @@ class _SettingTabState extends State<SettingTab> {
           ),
           Text(AppLocalizations.of(context)!.theme,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-    color: Theme.of(context).colorScheme.onSurface
+    color: Theme.of(context).colorScheme.onPrimary
     )),
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(12),
+            margin: EdgeInsets.all(12),
             decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color:Colors.blue,
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(color: primaryColor,
                 width: 2)),
             child: Row(
               children: [
                 Text(pro.modeApp==ThemeMode.light?AppLocalizations.of(context)!.light:AppLocalizations.of(context)!.dark,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(color:Theme.of(context).colorScheme.primary)),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color:Theme.of(context).colorScheme.onPrimary)),
                 Spacer(),
                 InkWell(
                     onTap: showThemingBottomSheet,
-                    child: Icon(Icons.arrow_drop_down,size: 30,color: MyThemeData.lightTheme.primaryColor,)),
+                    child: Icon(Icons.arrow_drop_down,size: 30,color:Theme.of(context).colorScheme.onPrimary,)),
               ],
             ),
           ),

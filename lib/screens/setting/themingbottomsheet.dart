@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:todo_project/shared/providers/Myprovider.dart';
 import 'package:todo_project/shared/styles/my_theme.dart';
 
+import '../../shared/styles/colors.dart';
+
 
 class ThemingBottomSheet extends StatelessWidget{
   const ThemingBottomSheet({super.key});
@@ -12,7 +14,6 @@ class ThemingBottomSheet extends StatelessWidget{
   Widget build(BuildContext context) {
     var provider=Provider.of<MyProvider>(context);
     return Container(
-      color: Theme.of(context).colorScheme.surface,
       padding: EdgeInsets.all(12),
       child: Column(
         children: [
@@ -27,20 +28,20 @@ class ThemingBottomSheet extends StatelessWidget{
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!.copyWith(
-                      color:Theme.of(context).colorScheme.onSurface
+                      color:Theme.of(context).colorScheme.onPrimary
                   )
                 ),
                 Spacer(),
                 (provider.modeApp==ThemeMode.
                 light)
                     ? Icon(Icons.done,
-                    size: 25, color:Theme.of(context).colorScheme.onSurface)
+                    size: 25, color:Theme.of(context).colorScheme.onPrimary)
                     : SizedBox.shrink(),
               ],
             ),
           ),
           Divider(
-            color: MyThemeData.lightTheme.primaryColor ,
+            color: primaryColor,
             thickness: 2,
             indent: 40,
             endIndent: 40,
@@ -56,7 +57,7 @@ class ThemingBottomSheet extends StatelessWidget{
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!.copyWith(
-                      color:Theme.of(context).colorScheme.onSurface
+                      color:Theme.of(context).colorScheme.onPrimary
                   )
                 ),
                 Spacer(),
@@ -64,7 +65,7 @@ class ThemingBottomSheet extends StatelessWidget{
                     ? SizedBox.shrink()
                     : Icon(
                   Icons.done,
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color:Theme.of(context).colorScheme.onPrimary,
                   size: 25,
                 ),
               ],

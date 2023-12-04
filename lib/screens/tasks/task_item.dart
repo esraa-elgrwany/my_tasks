@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_project/models/taskmodel.dart';
 import 'package:todo_project/screens/editScreen.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
@@ -15,8 +16,7 @@ class TaskItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
       child: Card(
-        color: Theme.of(context).colorScheme.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         child: Slidable(
           startActionPane: ActionPane(motion: DrawerMotion(), children: [
             SlidableAction(
@@ -27,8 +27,8 @@ class TaskItem extends StatelessWidget {
               label: "Delete",
               backgroundColor: Colors.red,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)),
+                  topLeft: Radius.circular(15.r),
+                  bottomLeft: Radius.circular(15.r)),
             ),
             SlidableAction(
               onPressed: (context) {
@@ -40,23 +40,24 @@ class TaskItem extends StatelessWidget {
               },
               icon: Icons.edit,
               label: "Edit",
-              backgroundColor: Colors.blue,
-            )
+              backgroundColor:
+            Theme.of(context).colorScheme.onPrimary
+            ),
           ]),
           child: Padding(
             padding: const EdgeInsets.all(18),
             child: Row(
               children: [
                 Container(
-                  width: 4,
-                  height: 70,
+                  width: 4.w,
+                  height: 70.h,
                   decoration: BoxDecoration(
                     color: primaryColor,
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(18.r),
                   ),
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 20.w,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,11 +69,11 @@ class TaskItem extends StatelessWidget {
                 Spacer(),
                 taskModel.isDone
                     ? Container(
-                        width: 69,
-                        height: 34,
+                        width: 69.w,
+                        height: 34.h,
                         decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(8)),
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(8.r)),
                         child: Center(
                             child: Text(
                           "Done",
@@ -84,11 +85,11 @@ class TaskItem extends StatelessWidget {
                           FireBaseFunctions.updateTask(taskModel);
                         },
                         child: Container(
-                            width: 69,
-                            height: 34,
+                            width: 69.w,
+                            height: 34.h,
                             decoration: BoxDecoration(
                                 color: primaryColor,
-                                borderRadius: BorderRadius.circular(8)),
+                                borderRadius: BorderRadius.circular(8.r)),
                             child: Icon(
                               Icons.done,
                               color: Colors.white,

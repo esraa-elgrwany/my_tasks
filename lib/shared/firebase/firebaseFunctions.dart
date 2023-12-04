@@ -60,7 +60,7 @@ class FireBaseFunctions {
     return docRef.set(userModel);
   }
 
-  static Future<void> createUser(String name, int age, String email,
+  static Future<void> createUser(String name, String email,
       String password, Function onSuccess, Function onError) async {
     try {
       final credential =
@@ -70,7 +70,7 @@ class FireBaseFunctions {
       );
       if (credential.user?.uid != null) {
         UserModel userModel = UserModel(
-            id: credential.user!.uid, name: name, age: age, email: email);
+            id: credential.user!.uid, name: name, email: email);
         addUser(userModel).then((value) {
           credential.user!.sendEmailVerification();
           onSuccess();

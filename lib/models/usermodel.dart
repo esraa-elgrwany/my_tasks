@@ -1,13 +1,11 @@
 class UserModel{
   String id;
   String name;
-  int age;
   String email;
 
   UserModel({
     required this.id ,
     required this.name,
-    required this.age,
     required this.email,
   });
 
@@ -15,7 +13,6 @@ class UserModel{
       : this(
       id: json['id'],
       name: json['name'],
-      age: json['age'],
       email: json['email'],
       );
 
@@ -23,7 +20,6 @@ class UserModel{
     return {
       "id": id,
       "name": name,
-      "age": age,
       "email": email,
     } ;
   }

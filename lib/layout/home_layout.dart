@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_project/models/usermodel.dart';
-import 'package:todo_project/screens/log/log.dart';
 import 'package:todo_project/screens/log/login_tab.dart';
 import 'package:todo_project/screens/setting/setting_tab.dart';
 import 'package:todo_project/screens/tasks/bottom_sheet.dart';
@@ -33,22 +31,26 @@ class _HomeLayoutState extends State<HomeLayout> {
                 children: [
                   Text(
                       AppLocalizations.of(context)!.appTitle,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Colors.white
+                      ),
                     ),
                 ],
               )
               : Text(
                   AppLocalizations.of(context)!.setting,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Colors.white
+                  ),
                 ),
         actions: [
           IconButton(
             onPressed: () {
               FirebaseAuth.instance.signOut();
               Navigator.pushNamedAndRemoveUntil(
-                  context, LogScreen.routeName, (route) => false);
+                  context, LoginTab.routeName, (route) => false);
             },
-              icon: Icon(Icons.logout)),
+              icon: Icon(Icons.logout,color: Colors.white,)),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -59,7 +61,7 @@ class _HomeLayoutState extends State<HomeLayout> {
           backgroundColor: Theme.of(context).colorScheme.primary,
           shape: CircleBorder(
               side: BorderSide(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.primary,
             width: 4,
           )),
           child: Icon(
@@ -69,7 +71,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 8,
-        color: Theme.of(context).colorScheme.surface,
+        color: Theme.of(context).colorScheme.primary,
         child: BottomNavigationBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
