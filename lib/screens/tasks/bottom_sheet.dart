@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_project/models/taskmodel.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
 import 'package:todo_project/shared/styles/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskBottomSheet extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Add New Task",
+                AppLocalizations.of(context)!.addNewTask,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -49,9 +50,16 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  label: Text("Task name",
+                  suffixIcon: Icon(Icons.edit,color: Theme
+                      .of(context)
+                      .colorScheme
+                      .secondary ,),
+                  label: Text(AppLocalizations.of(context)!.taskTitle,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color:  Theme.of(context).colorScheme.onPrimary)),
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .onSurface,)),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       width: 2.w,
@@ -79,9 +87,16 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  label: Text("Task Description",
+                  suffixIcon: Icon(Icons.edit,color: Theme
+                      .of(context)
+                      .colorScheme
+                      .secondary,),
+                  label: Text(AppLocalizations.of(context)!.taskDescription,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color:  Theme.of(context).colorScheme.onPrimary)),
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .onSurface,)),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       width: 2,
@@ -102,12 +117,15 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
               ),
               Row(
                 children: [
-                  Text("Selected Date",
+                  Text(AppLocalizations.of(context)!.selectedDate,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color:  Theme.of(context).colorScheme.onPrimary)),
                   SizedBox(width: 8.w,),
-                  Icon(Icons.date_range,color:
-                  Theme.of(context).colorScheme.onPrimary),
+                  Icon(Icons.date_range,
+                  color: Theme
+                      .of(context)
+                      .colorScheme
+                      .secondary),
                 ],
               ),
               SizedBox(
@@ -120,7 +138,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                 child: Text(
                   selectedDate.toString().substring(0, 10),
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color:   Theme.of(context).colorScheme.onPrimary
+                    color:   Theme.of(context).colorScheme.onSurface
                   ),
                   textAlign: TextAlign.center,
 
@@ -140,6 +158,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                           userId: FirebaseAuth.instance.currentUser!.uid,
                         );
                         FireBaseFunctions.addTask(taskModel);
+
                         Navigator.pop(context);
 
                       }
@@ -149,7 +168,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                       borderRadius: BorderRadiusDirectional.circular(12),
                     ))),
-                    child: Text("add Task",
+                    child: Text(AppLocalizations.of(context)!.addTask,
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!

@@ -1,10 +1,20 @@
 {
   "appTitle": "Taski",
-  "lang": "Language",
+  "lang": "default Language",
   "en": "English",
-  "ar": "arabic",
-  "theme": "Theming",
-  "dark": "Dark",
-  "light": "Light",
-  "setting": "Settings"
+  "ar": "translate to arabic",
+  "translate": "Translation",
+  "theme": "default mode",
+  "dark": "Dark Mode",
+  "light": "Light Mode",
+  "setting": "Settings",
+  "saveChanges": "Save Changes",
+  "addTask": "Add Task",
+  "taskTitle": "Task Title",
+  "taskDescription": "Task Description",
+  "selectedDate": "Selected Date",
+  "editTask": "Edit Task",
+  "addNewTask": "Add New Task",
+  "edit": "Edit",
+  "delete": "Delete"
 }

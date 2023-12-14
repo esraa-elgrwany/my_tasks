@@ -19,7 +19,7 @@ class _LoginTabState extends State<LoginTab> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
- bool secure=false;
+ bool secure=true;
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -67,7 +67,7 @@ class _LoginTabState extends State<LoginTab> {
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
-                                  .copyWith(color: primaryColor)),
+                                  .copyWith(color: Theme.of(context).colorScheme.onPrimary)),
                         ),
                         SizedBox(
                           height: 60.h,
@@ -94,9 +94,9 @@ class _LoginTabState extends State<LoginTab> {
                                     .textTheme
                                     .bodyMedium!
                                     .copyWith(
-                                        color:primaryColor)),
+                                    color: Theme.of(context).colorScheme.onPrimary)),
 
-                            prefixIcon: Icon(Icons.email_rounded,color: primaryColor,),
+                            prefixIcon: Icon(Icons.email_rounded,color: Theme.of(context).colorScheme.secondary,),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 2,
@@ -133,15 +133,14 @@ class _LoginTabState extends State<LoginTab> {
                                     .textTheme
                                     .bodyMedium!
                                     .copyWith(
-                                      color:
-                                         primaryColor,
+                                    color: Theme.of(context).colorScheme.onPrimary
                                     )),
-                            prefixIcon: Icon(Icons.lock,color: primaryColor,),
+                            prefixIcon: Icon(Icons.lock,color: Theme.of(context).colorScheme.secondary,),
                             suffixIcon:IconButton(onPressed:() {
                               secure=!secure;
                               setState(() {
                               });
-                            }, icon:Icon(Icons.remove_red_eye_rounded,color: primaryColor,),),
+                            }, icon:Icon(Icons.remove_red_eye_rounded,color: Theme.of(context).colorScheme.secondary),),
 
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -229,7 +228,7 @@ class _LoginTabState extends State<LoginTab> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
-                                          .copyWith(color:primaryColor,fontWeight: FontWeight.w200)),
+                                          .copyWith(color: Theme.of(context).colorScheme.onPrimary,fontWeight: FontWeight.w200)),
                                   SizedBox(height: 10.h,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -238,9 +237,9 @@ class _LoginTabState extends State<LoginTab> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
-                                      .copyWith(color: primaryColor)),
-                              SizedBox(width: 4.w,),
-                              Icon(Icons.arrow_circle_right_outlined,color: primaryColor,)
+                                      .copyWith(color: Theme.of(context).colorScheme.onPrimary)),
+                              SizedBox(width: 8.w,),
+                              Icon(Icons.arrow_circle_right_outlined,color: Theme.of(context).colorScheme.secondary,)
                                 ],
                               ),
                       ],

@@ -6,6 +6,7 @@ import 'package:todo_project/layout/home_layout.dart';
 import 'package:todo_project/models/taskmodel.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
 import 'package:todo_project/shared/styles/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditScreen extends StatefulWidget {
   //static const String routeName = "editScreen";
@@ -36,7 +37,7 @@ void initState() {
       resizeToAvoidBottomInset: false,
       extendBody: true,
       appBar: AppBar(
-          toolbarHeight: 100,
+          toolbarHeight: 100.h,
           title: Text(
             AppLocalizations.of(context)!.appTitle,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -44,11 +45,15 @@ void initState() {
             ),
           )),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.only(top: 48,right: 24,left: 24),
         child: Card(
           margin: EdgeInsets.symmetric(horizontal: 25),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
+            side: BorderSide(
+              color: primaryColor,
+              width: 2.w
+            )
           ),
           child: Form(
             key: formKey,
@@ -60,14 +65,14 @@ void initState() {
                 children: [
                   Center(
                     child: Text(
-                      "Edit Task",
+                    AppLocalizations.of(context)!.editTask  ,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 40.h,
                   ),
                   TextFormField(
                     controller: titleController,
@@ -78,15 +83,21 @@ void initState() {
                       return null;
                     },
                     decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.surface,
-                      label: Text("Task Title",
+                      suffixIcon: Icon(Icons.edit,color: Theme
+                          .of(context)
+                          .colorScheme
+                          .secondary),
+                      label: Text(AppLocalizations.of(context)!.taskTitle,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!
                               .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary)),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16.sp,
+                                  color: Theme
+                              .of(context)
+                              .colorScheme
+                              .onPrimary)),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 2.w,
@@ -103,7 +114,7 @@ void initState() {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 40.h,
                   ),
                   TextFormField(
                     controller: descriptionController,
@@ -114,13 +125,17 @@ void initState() {
                       return null;
                     },
                     decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.edit,color:Theme.of(context).
-                      colorScheme.onPrimary ,),
-                      label: Text("Task Description",
+                      suffixIcon: Icon(Icons.edit,color: Theme
+                          .of(context)
+                          .colorScheme
+                          .secondary),
+                      label: Text(AppLocalizations.of(context)!.taskDescription,
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall!
                               .copyWith(
+                            fontWeight: FontWeight.w700,
+                                  fontSize: 16.sp,
                                   color:
                                       Theme.of(context).colorScheme.onPrimary)),
                       enabledBorder: OutlineInputBorder(
@@ -139,13 +154,23 @@ void initState() {
                     ),
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 30.h,
                   ),
-                  Text("Selected Date",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary)),
+                  Row(
+                    children: [
+                      Text(AppLocalizations.of(context)!.selectedDate,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary)),
+                      SizedBox(width: 8.w,),
+                      Icon(Icons.date_range,
+                          color: Theme
+                              .of(context)
+                              .colorScheme
+                              .secondary),
+                    ],
+                  ),
                   SizedBox(
-                    height: 20.h,
+                    height: 30.h,
                   ),
                   InkWell(
                     onTap: () {
@@ -155,7 +180,7 @@ void initState() {
                       child: Text(
                         selectedDate.toString().substring(0, 10),
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary),
+                            color: Theme.of(context).colorScheme.onSurface),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -188,10 +213,8 @@ void initState() {
                                 MaterialStatePropertyAll(RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadiusDirectional.circular(12.r),
-                                  side: BorderSide(color: Theme.of(context).
-                                  colorScheme.onPrimary)
                             ))),
-                        child: Text("Save Changes",
+                        child: Text(AppLocalizations.of(context)!.saveChanges,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!

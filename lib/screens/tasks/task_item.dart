@@ -5,6 +5,7 @@ import 'package:todo_project/screens/editScreen.dart';
 import 'package:todo_project/shared/firebase/firebaseFunctions.dart';
 import 'package:todo_project/shared/styles/colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskItem extends StatelessWidget {
   TaskModel taskModel;
@@ -14,9 +15,14 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 18),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r),
+          side: BorderSide(
+            color: primaryColor,
+                width:2.w
+          )
+        ),
         child: Slidable(
           startActionPane: ActionPane(motion: DrawerMotion(), children: [
             SlidableAction(
@@ -24,7 +30,7 @@ class TaskItem extends StatelessWidget {
                 FireBaseFunctions.deleteTask(taskModel.id);
               },
               icon: Icons.delete,
-              label: "Delete",
+              label: AppLocalizations.of(context)!.delete,
               backgroundColor: Colors.red,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15.r),
@@ -39,20 +45,19 @@ class TaskItem extends StatelessWidget {
                     ));
               },
               icon: Icons.edit,
-              label: "Edit",
-              backgroundColor:
-            Theme.of(context).colorScheme.onPrimary
+              label: AppLocalizations.of(context)!.edit,
+              backgroundColor:primaryColor
             ),
           ]),
           child: Padding(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(24),
             child: Row(
               children: [
                 Container(
                   width: 4.w,
                   height: 70.h,
                   decoration: BoxDecoration(
-                    color: primaryColor,
+                    color:  Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(18.r),
                   ),
                 ),
@@ -60,19 +65,39 @@ class TaskItem extends StatelessWidget {
                   width: 20.w,
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(taskModel.title),
-                    Text(taskModel.description),
-                  ],
-                ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(taskModel.title,style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary
+                      )),
+                      SizedBox(
+                        height: 6.h,
+                      ),
+                      Text(taskModel.description,style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface
+                      )),
+                      SizedBox(
+                        height: 6.h,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.access_time_outlined,
+                            color:Theme.of(context).colorScheme.secondary,),
+                          SizedBox(width: 8.w,),
+                          Text("10:40",style: TextStyle(
+                            color:  Theme.of(context).colorScheme.secondary
+                          ),),
+                        ],
+                      )
+                    ],
+                  ),
                 Spacer(),
                 taskModel.isDone
                     ? Container(
                         width: 69.w,
                         height: 34.h,
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: Colors.green,
                             borderRadius: BorderRadius.circular(8.r)),
                         child: Center(
                             child: Text(

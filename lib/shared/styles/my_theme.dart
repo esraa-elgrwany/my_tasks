@@ -9,7 +9,7 @@ class MyThemeData{
   static ThemeData lightTheme=ThemeData(
     colorScheme: ColorScheme(
         brightness: Brightness.light,
-        primary:primaryColor, onPrimary:primaryColor, secondary: Colors.black,
+        primary:primaryColor, onPrimary:primaryColor, secondary: primaryColor,
         onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
         background:Colors.white,
         onBackground:Colors.white,
@@ -51,8 +51,8 @@ class MyThemeData{
   static ThemeData darkTheme=ThemeData(
     colorScheme: ColorScheme(
         brightness: Brightness.dark,
-        primary:primaryColor, onPrimary: Colors.white, secondary:Colors.grey,
-        onSecondary:Colors.black, error: Colors.red, onError: Colors.red,
+        primary:primaryColor, onPrimary: Colors.white, secondary:darkPrimary,
+        onSecondary:Colors.white, error: Colors.red, onError: Colors.red,
         background:darkBg,
         onBackground:darkgrey,
         surface:darkgrey,
@@ -62,7 +62,7 @@ class MyThemeData{
     appBarTheme: AppBarTheme(
       color: primaryColor,
         iconTheme: IconThemeData(
-            color: Colors.black
+            color: Colors.white
         )
     ),
       textTheme: TextTheme(
