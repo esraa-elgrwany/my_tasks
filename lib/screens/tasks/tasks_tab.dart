@@ -28,8 +28,8 @@ class _TasksTabState extends State<TasksTab> {
               setState(() {});
             },
             leftMargin: 20,
-            monthColor: Theme.of(context).colorScheme.onPrimary,
-            dayColor: primaryColor.withOpacity(.7),
+            monthColor:  Theme.of(context).colorScheme.onPrimary,
+            dayColor:  Theme.of(context).colorScheme.onPrimary,
             activeDayColor: Colors.white,
             activeBackgroundDayColor: primaryColor,
             dotsColor: Colors.white,
@@ -43,13 +43,16 @@ class _TasksTabState extends State<TasksTab> {
                 return Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                return Center(child: Text("something went wrong"));
+                return Center(child: Text("something went wrong",style: TextStyle(
+                  color:  Theme.of(context).colorScheme.onPrimary
+                ),));
               }
              // print(snapshot.data?.docs.length ?? '###');
               List<TaskModel> tasks =
                   snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
               if(tasks.isEmpty){
-               return Center(child: Text("No tasks"));
+               return Center(child: Text("No tasks",style: TextStyle(
+                   color:  Theme.of(context).colorScheme.onPrimary)));
               }
               return Expanded(
                 child: ListView.builder(

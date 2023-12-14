@@ -8,6 +8,8 @@ class MyProvider extends ChangeNotifier{
   ThemeMode modeApp=ThemeMode.light;
   UserModel? userModel;
   User? firebaseUser;
+  bool isArabic=false;
+  bool isDark=false;
 
   MyProvider(){
     firebaseUser=FirebaseAuth.instance.currentUser;
